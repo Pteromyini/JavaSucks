@@ -36,8 +36,14 @@ public class DynamicArrayStack<E> implements Stack<E> {
     public E pop() {
         // Your code here.
         if (isEmpty() == false){
+
             E temp = elems [--top];
             elems[top] = null;
+
+            if (top < DEFAULT_INC){
+                decreaseSize ();
+            }
+
             return temp;
         }
         return null;
@@ -55,16 +61,34 @@ public class DynamicArrayStack<E> implements Stack<E> {
         elems = temp;
     }
 
+    private void decreaseSize (){
+        E [] temp = (E []) new Object [DEFAULT_INC];
+
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = elems[i];
+        }
+
+        //temp [top++] = element;
+
+        elems = temp;
+    }
+
     @SuppressWarnings( "unchecked" )
 
     // Puts the element onto the top of this stack.
     public void push( E element ) {
         // Your code here.
-        if (top < elems.length){
+        /*if (top < elems.length){
             elems[top++] = element;
         }
         else {
             increaseSize(element);
+        }*/
+        if (top >= elems.length){
+            increaseSize(element);
+        }
+        else {
+            elems[top++] = element;
         }
     }
 
@@ -78,7 +102,7 @@ public class DynamicArrayStack<E> implements Stack<E> {
     }
 
     ///////////////////////////////////////////////////
-    public static void testPushDynamic24th() {
+    /*public static void testPushDynamic24th() {
       DynamicArrayStack<Integer> myStack = new DynamicArrayStack<Integer>(25);
       for (int i = 0; i < 24; i++) {
         myStack.push(i);
@@ -122,29 +146,19 @@ public static void testPopDynamic26th25th() {
     myStack.push(i);
 }
 
-/*System.out.println("no pop");
-for (int i : myStack) {
-    System.out.println(myStack[i]);
-}
 
-System.out.println("pop 1");*/
+System.out.println("pop 1");
 //System.out.println("capacity = " + myStack.getCapacity());
-System.out.println( "top = " + myStack.peek());
+//System.out.println( "top = " + myStack.peek());
 myStack.pop();
 //System.out.println("capacity = " + myStack.getCapacity());
 
-/*for (int i : myStack) {
-    System.out.println(myStack[i]);
-}
 
-System.out.println("pop 2");*/
-System.out.println( "top = " + myStack.peek());
+System.out.println("pop 2");
+//System.out.println( "top = " + myStack.peek());
 myStack.pop();
 //System.out.println("capacity = " + myStack.getCapacity());
 
-/*for (int i : myStack) {
-    System.out.println(myStack[i]);
-}*/
       //assertEquals(25, (int) myStack.getCapacity());
 System.out.println("25 = " + (int) myStack.getCapacity());
 
@@ -183,7 +197,7 @@ System.out.println(myStack.isEmpty());
 
 public static void main(String[] args) {
 
-    /*System.out.println("testPushDynamic24th");
+    System.out.println("testPushDynamic24th");
     testPushDynamic24th();
     System.out.println();
 
@@ -193,22 +207,22 @@ public static void main(String[] args) {
 
     System.out.println("testPopDynamic1st");
     testPopDynamic1st();
-    System.out.println();*/
+    System.out.println();
 
     System.out.println("testPopDynamic26th25th");
     testPopDynamic26th25th();
     System.out.println();
 
-    /*System.out.println("testClearDynamic5");
+    System.out.println("testClearDynamic5");
     testClearDynamic5();
     System.out.println();
 
     System.out.println("testClearDynamic100");
     testClearDynamic100();
-    System.out.println();*/
+    System.out.println();
 
 
 
-}
+}*/
 
 }
