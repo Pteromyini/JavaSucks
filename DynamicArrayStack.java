@@ -40,13 +40,30 @@ public class DynamicArrayStack<E> implements Stack<E> {
             E temp = elems [--top];
             elems[top] = null;
 
-            if (top < DEFAULT_INC){
+            if (top == DEFAULT_INC){
                 decreaseSize ();
             }
 
             return temp;
         }
         return null;
+    }
+
+    private void decreaseSize (){
+        E [] temp = (E []) new Object [DEFAULT_INC];
+
+        /*if (top < DEFAULT_INC) {
+            temp = (E []) new Object [elems.length - 1];
+        }
+        else {
+            temp = (E []) new Object [DEFAULT_INC];
+        }*/
+
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = elems[i];
+        }
+
+        elems = temp;
     }
 
     private void increaseSize(E element){
@@ -57,18 +74,6 @@ public class DynamicArrayStack<E> implements Stack<E> {
         }
 
         temp [top++] = element;
-
-        elems = temp;
-    }
-
-    private void decreaseSize (){
-        E [] temp = (E []) new Object [DEFAULT_INC];
-
-        for (int i = 0; i < temp.length; i++) {
-            temp[i] = elems[i];
-        }
-
-        //temp [top++] = element;
 
         elems = temp;
     }
@@ -96,7 +101,7 @@ public class DynamicArrayStack<E> implements Stack<E> {
 
     public void clear() {
         // Your code here.
-        for (int i = 0; i < elems.length; i++) {
+        while (! isEmpty()) {
             pop();
         }
     }
@@ -147,14 +152,14 @@ public static void testPopDynamic26th25th() {
 }
 
 
-System.out.println("pop 1");
+//System.out.println("pop 1");
 //System.out.println("capacity = " + myStack.getCapacity());
 //System.out.println( "top = " + myStack.peek());
 myStack.pop();
 //System.out.println("capacity = " + myStack.getCapacity());
 
 
-System.out.println("pop 2");
+//System.out.println("pop 2");
 //System.out.println( "top = " + myStack.peek());
 myStack.pop();
 //System.out.println("capacity = " + myStack.getCapacity());
@@ -186,7 +191,9 @@ public static void testClearDynamic100() {
   for (int i = 0; i < 100; i++) {
     myStack.push(i);
 }
+System.out.println("peak = " + myStack.peek());
 myStack.clear();
+//System.out.println("peak = " + myStack.peek());
       //assertEquals(true, myStack.isEmpty());
 System.out.println(myStack.isEmpty());
 //assertEquals(true, myStack.isEmpty());
