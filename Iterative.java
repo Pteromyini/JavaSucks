@@ -7,33 +7,29 @@ public class Iterative {
             throw new NullPointerException();
         }
 
-        /*if ( in.size() == 0 ) {
-            throw new IllegalArgumentException( "Bro, this BitList has nothing in it." );
-        }*/
+        // make deep copy
+        BitList deepCopyOfIn = new BitList();
+        Iterator iteratorOfIn = in.iterator();
 
-        BitList inDeepCopy = new BitList();
-        Iterator inIterator = in.iterator();
-
-        while ( inIterator.hasNext() ) {
-            inDeepCopy.addFirst( inIterator.next() );
+        while ( iteratorOfIn.hasNext() ) {
+            deepCopyOfIn.addFirst( iteratorOfIn.next() );
         }
 
+        // flip bits and store into a BitList
         BitList logicalNot = new BitList();
-        Iterator temp = in.iterator();
+        iteratorOfIn = deepCopyOfIn.iterator();
 
-        while ( temp.hasNext() ) {
+        while ( iteratorOfIn.hasNext() ) {
+            iteratorOfIn.next();
 
-            int tempValue = temp.next();
-            System.out.println( "value is = " + tempValue );
-            
-            if ( tempValue == 0 ) {
-                logicalNot.addFirst ( 1 );
+            int value = deepCopyOfIn.removeFirst();
+
+            if ( value == 0 ) {
+                logicalNot.addFirst( 1 );
             }
             else {
-                logicalNot.addFirst ( 0 );    
+                logicalNot.addFirst( 0 );
             }
-
-            System.out.println( "logicalNot = \n" + logicalNot + "\n" );
         }
 
         return logicalNot;
@@ -51,23 +47,43 @@ public class Iterative {
         }
 
         if ( a.size() == 0 && b.size() == 0 ) {
-            throw new IllegalArgumentException( "Bro, these two BitList are not the same size." );
+            throw new IllegalArgumentException( "Bro, these two BitList are empty." );
         }
 
-        Iterator temp1 = a.iterator();
-        Iterator temp2 = b.iterator();
+        // make deep copy of a
+        BitList deepCopyOfA = new BitList();
+        Iterator iteratorOfA = a.iterator();
+
+        while ( iteratorOfA.hasNext() ) {
+            deepCopyOfA.addFirst( iteratorOfA.next() );
+        }
+
+        // make deep copy of b
+        BitList deepCopyOfB = new BitList();
+        Iterator iteratorOfB = b.iterator();
+
+        while ( iteratorOfB.hasNext() ) {
+            deepCopyOfB.addFirst( iteratorOfB.next() );
+        }
+
+        // apply the logical OR of the bits between deepCopyOfA and deepCopyOfB then store them
+        iteratorOfA = deepCopyOfA.iterator();
+        iteratorOfB = deepCopyOfB.iterator();
 
         BitList logicalOR = new BitList();
 
-        while ( temp1.hasNext() && temp2.hasNext() ) {
-            int temp1Value = temp1.next();
-            int temp2Value = temp2.next();
+        while ( iteratorOfA.hasNext() && iteratorOfB.hasNext() ) {
+            iteratorOfA.next();
+            iteratorOfB.next();
 
-            if ( temp1Value == 0 && temp2Value == 0 ) {
-                logicalOR.addFirst ( 0 );
+            int valueOfA = deepCopyOfA.removeFirst();
+            int valueOfB = deepCopyOfB.removeFirst();
+
+            if ( valueOfA == 0 && valueOfB == 0 ) {
+                logicalOR.addFirst( 0 );
             }
             else {
-                logicalOR.addFirst ( 1 );
+                logicalOR.addFirst( 1 );
             }
         }
 
@@ -87,27 +103,47 @@ public class Iterative {
         }
 
         if ( a.size() == 0 && b.size() == 0 ) {
-            throw new IllegalArgumentException( "Bro, these two BitList are not the same size." );
+            throw new IllegalArgumentException( "Bro, these two BitList are empty." );
         }
 
-        Iterator temp1 = a.iterator();
-        Iterator temp2 = b.iterator();
+        // make deep copy of a
+        BitList deepCopyOfA = new BitList();
+        Iterator iteratorOfA = a.iterator();
 
-        BitList logicalAnd = new BitList();
+        while ( iteratorOfA.hasNext() ) {
+            deepCopyOfA.addFirst( iteratorOfA.next() );
+        }
 
-        while ( temp1.hasNext() && temp2.hasNext() ) {
-            int temp1Value = temp1.next();
-            int temp2Value = temp2.next();
+        // make deep copy of b
+        BitList deepCopyOfB = new BitList();
+        Iterator iteratorOfB = b.iterator();
 
-            if ( temp1Value == 1 && temp2Value == 1 ) {
-                logicalAnd.addFirst ( 1 );
+        while ( iteratorOfB.hasNext() ) {
+            deepCopyOfB.addFirst( iteratorOfB.next() );
+        }
+
+        // apply the logical OR of the bits between deepCopyOfA and deepCopyOfB then store them
+        iteratorOfA = deepCopyOfA.iterator();
+        iteratorOfB = deepCopyOfB.iterator();
+
+        BitList logicalAND = new BitList();
+
+        while ( iteratorOfA.hasNext() && iteratorOfB.hasNext() ) {
+            iteratorOfA.next();
+            iteratorOfB.next();
+
+            int valueOfA = deepCopyOfA.removeFirst();
+            int valueOfB = deepCopyOfB.removeFirst();
+
+            if ( valueOfA == 1 && valueOfB == 1 ) {
+                logicalAND.addFirst( 1 );
             }
             else {
-                logicalAnd.addFirst ( 0 );
+                logicalAND.addFirst( 0 );
             }
         }
 
-        return logicalAnd;
+        return logicalAND;
     }
 
 	public static BitList xor( BitList a, BitList b ) {
@@ -122,23 +158,46 @@ public class Iterative {
         }
 
         if ( a.size() == 0 && b.size() == 0 ) {
-            throw new IllegalArgumentException( "Bro, these two BitList are not the same size." );
+            throw new IllegalArgumentException( "Bro, these two BitList are empty." );
         }
 
-        Iterator temp1 = a.iterator();
-        Iterator temp2 = b.iterator();
+        // make deep copy of a
+        BitList deepCopyOfA = new BitList();
+        Iterator iteratorOfA = a.iterator();
+
+        while ( iteratorOfA.hasNext() ) {
+            deepCopyOfA.addFirst( iteratorOfA.next() );
+        }
+
+        // make deep copy of b
+        BitList deepCopyOfB = new BitList();
+        Iterator iteratorOfB = b.iterator();
+
+        while ( iteratorOfB.hasNext() ) {
+            deepCopyOfB.addFirst( iteratorOfB.next() );
+        }
+
+        // apply the logical OR of the bits between deepCopyOfA and deepCopyOfB then store them
+        iteratorOfA = deepCopyOfA.iterator();
+        iteratorOfB = deepCopyOfB.iterator();
 
         BitList logicalXOR = new BitList();
 
-        while ( temp1.hasNext() && temp2.hasNext() ) {
-            int temp1Value = temp1.next();
-            int temp2Value = temp2.next();
+        while ( iteratorOfA.hasNext() && iteratorOfB.hasNext() ) {
+            iteratorOfA.next();
+            iteratorOfB.next();
 
-            if ( ( temp1Value == 0 && temp2Value == 0 ) || ( temp1Value == 1 && temp2Value == 1 ) ){
-                logicalXOR.addFirst ( 0 );
+            int valueOfA = deepCopyOfA.removeFirst();
+            int valueOfB = deepCopyOfB.removeFirst();
+
+            if ( valueOfA == 0 && valueOfB == 0 ) {
+                logicalXOR.addFirst( 0 );
+            }
+            else if ( valueOfA == 1 && valueOfB == 1 ) {
+                logicalXOR.addFirst( 0 );
             }
             else {
-                logicalXOR.addFirst ( 1 );
+                logicalXOR.addFirst( 1 );
             }
         }
 
@@ -146,7 +205,7 @@ public class Iterative {
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public static void testComplementSingle0() {
+    /*public static void testComplementSingle0() {
 
         BitList list = new BitList("0");
         Iterative it = new Iterative();
@@ -418,5 +477,5 @@ public class Iterative {
         testXor();
         System.out.println(  );
 
-    }
+    }*/
 }
